@@ -9,7 +9,7 @@ on:
         required: false
         type: string
       cache:
-        default: 'npm'
+        default: npm
         description: Package manager for caching - passed to the actions/setup-node
         required: false
         type: string
