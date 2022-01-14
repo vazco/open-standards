@@ -1,0 +1,15 @@
+name: 'Npm dependency duplications'
+description: 'Check npm dependency duplications'
+inputs:
+  project-path:
+    default: .
+    description: NPM project localization
+    required: false
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.project-path }}
