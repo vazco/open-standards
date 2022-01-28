@@ -1,5 +1,5 @@
-name: 'Npm dependency duplications'
-description: 'Check npm dependency duplications'
+name: 'Npm security audit'
+description: 'Checks if project dependencies have any known vulnerabilities.'
 inputs:
   project-path:
     default: .

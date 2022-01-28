@@ -10,5 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Test dedupe
+      - name: Test dedupe action
         run: ./actions/npm-dependency-duplications/runTests.sh
+      - name: Test vulnerabilities action
+        run: ./actions/npm-dependency-vulnerabilities/runTests.sh
