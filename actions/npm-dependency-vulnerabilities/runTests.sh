@@ -20,7 +20,7 @@ actionPath="actions/npm-dependency-vulnerabilities/"
 testsPath="$actionPath"test
 
 #Runner
-echo "Detects dependency vulnerabilities"
+echo "- Detects dependency vulnerabilities"
 positiveTest() {
   desiredOutput="::warning file=actions/npm-dependency-vulnerabilities/test/positive/package-lock.json::Dependency vulnerabilities found. Run npm audit to get more info."
 
@@ -29,7 +29,7 @@ positiveTest() {
 }
 positiveTest
 
-echo "Detects no vulnerabilities of dependencies"
+echo "- Detects no vulnerabilities of dependencies"
 negativeTest() {
   desiredOutput="No vulnerabilities found."
   output=$("$actionPath"entrypoint.sh "$testsPath"/negative)

@@ -20,7 +20,7 @@ actionPath="actions/npm-dependency-duplications/"
 testsPath="$actionPath"test
 
 #Runner
-echo "Detects dependency duplication"
+echo "- Detects dependency duplication"
 positiveTest() {
   desiredOutput="::warning file=package-lock.json::Duplicate dependencies found. Run npm dedupe to remove them, or add --dry-run parameter to get more info."
   output=$("$actionPath"entrypoint.sh "$testsPath"/positive)
@@ -28,7 +28,7 @@ positiveTest() {
 }
 positiveTest
 
-echo "Detects no duplication of dependencies"
+echo "- Detects no duplication of dependencies"
 negativeTest() {
   desiredOutput="No dependency duplication found."
   output=$("$actionPath"entrypoint.sh "$testsPath"/negative)
