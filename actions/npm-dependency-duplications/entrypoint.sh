@@ -9,4 +9,5 @@ if [ "$diffRes" != "" ]; then
 else
    echo "No dependency duplication found."
 fi
-rm package-lock-copy.json
+rm package-lock.json
+mv package-lock-copy.json package-lock.json
