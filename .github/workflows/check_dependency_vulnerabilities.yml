@@ -1,39 +1,61 @@
-name: Check npm dependency vulnerabilities
-
+name: "npm-dependency-vulnerabilities unit-test"
 on:
-  workflow_call:
-    inputs:
-      node-version:
-        default: 16
-        description: Node version passed to the actions/setup-node
-        required: false
-        type: string
-      cache:
-        default: npm
-        description: Package manager for caching - passed to the actions/setup-node
-        required: false
-        type: string
-      project-path:
-        default: .
-        description: NPM project localization
-        required: false
-        type: string
+  pull_request:
+  push:
+    branches:
+      - master
+    paths:
+      - 'npm-dependency-vulnerabilities'
 
 jobs:
-  check_duplications:
-    name: Check dependency vulnerabilities
+  units:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./actions/npm-dependency-vulnerabilities
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm test
+
+  check-dist:
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./actions/npm-dependency-vulnerabilities
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild the dist/ directory
+        run: npm run prepare
+
+      - name: Compare the expected and actual dist/ directories
+        run: |
+          if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
+            echo "Detected uncommitted changes after build.  See status below:"
+            git diff
+            exit 1
+          fi
+        id: diff
+
+      # If index.js was different from expected, upload the expected version as an artifact
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        with:
+          name: dist
+          path: dist/
+
+  # test action works running from the graph
+  test:
+    env:
+      working-directory: ./actions/npm-dependency-vulnerabilities
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.4.0
-      - name: Use Node.js ${{ inputs.node-version }}
-        uses: actions/setup-node@v2.5.0
-        with:
-          cache: ${{ inputs.cache }}
-          node-version: ${{ inputs.node-version }}
-      - name: Check vulnerabilities
-        run: |
-          cd ${{ inputs.project-path }}
-          npm audit fix || true # skip non-0 exit
-          git status -s | grep " M package-lock.json" && echo "::"warning file=package-lock.json"::"Found vulnerabilities in the project dependencies. Run npm audit to show the audit details. More info: https://docs.npmjs.com/cli/v7/commands/npm-audit
-          git reset --hard HEAD
+      - uses: actions/checkout@v2
+      - uses: ./

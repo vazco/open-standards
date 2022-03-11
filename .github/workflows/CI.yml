@@ -12,5 +12,3 @@ jobs:
       - uses: actions/checkout@v1
       - name: Test dedupe action
         run: ./actions/npm-dependency-duplications/runTests.sh
-      - name: Test vulnerabilities action
-        run: ./actions/npm-dependency-vulnerabilities/runTests.sh
