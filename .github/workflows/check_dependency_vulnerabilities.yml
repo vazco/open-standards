@@ -53,9 +53,7 @@ jobs:
 
   # test action works running from the graph
   test:
-    env:
-      working-directory: ./actions/npm-dependency-vulnerabilities
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - uses: ./actions/npm-dependency-vulnerabilities
