@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - working-directory: ./actions/npm-dependency-duplications
+      - name: Run tests
+        working-directory: ./actions/npm-dependency-duplications
         run: |
           npm ci
           npm run test
@@ -27,13 +28,11 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install dependencies
+      - name: Install dependencies and build
         working-directory: ./actions/npm-dependency-duplications
-        run: npm ci
-
-      - name: Rebuild the dist/ directory
-        working-directory: ./actions/npm-dependency-duplications
-        run: npm run prepare
+        run: |
+          npm ci
+          npm run prepare
 
       - name: Compare the expected and actual dist/ directories
         working-directory: ./actions/npm-dependency-duplications
