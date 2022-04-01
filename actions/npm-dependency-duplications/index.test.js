@@ -10,13 +10,14 @@ function runTestFile(filename, env) {
 test('test runs', () => {
     process.env['INPUT_PATH'] = "test/negative";
     const result = runTestFile('index.js', process.env)
-    console.log("result", result)
+
     expect(result.includes("No dependency duplication found.")).toBeTruthy()
     expect(result.includes("::warning")).toBeFalsy()
 })
 test('test runs', () => {
     process.env['INPUT_PATH'] = "test/positive";
     const result = runTestFile('index.js', process.env)
+    console.log("result", result)
 
     expect(result
             .includes("::warning file=test/positive/package-lock.json::Dependency duplications found. Run npm dedupe to fix them."))
