@@ -4,11 +4,11 @@ This action check npm dependency duplication using [npm-dedupe](https://docs.npm
 
 ## Inputs
 
-## `project-path`
+## `path`
 
 **Optional** The path to node project. Default value is '.' (root).
 
 ## Example usage
 uses: vazco/open-standards/actions/npm-dependency-duplications/@master
 with:
-project-path: 'applications/client'
+    path: 'applications/client'

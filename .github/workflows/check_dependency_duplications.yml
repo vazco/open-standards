@@ -1,39 +1,60 @@
-name: Check npm dependency duplications
-
+name: "npm-dependency-duplications test"
 on:
-  workflow_call:
-    inputs:
-      node-version:
-        default: 16
-        description: Node version passed to the actions/setup-node
-        required: false
-        type: string
-      cache:
-        default: npm
-        description: Package manager for caching - passed to the actions/setup-node
-        required: false
-        type: string
-      project-path:
-        default: .
-        description: NPM project localization
-        required: false
-        type: string
+  pull_request:
+  push:
+    branches:
+      - master
+    paths:
+      - 'npm-dependency-duplications'
 
 jobs:
-  check_duplications:
-    name: Check dependency duplications
+  units:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.4.0
-      - name: Use Node.js ${{ inputs.node-version }}
-        uses: actions/setup-node@v2.5.0
-        with:
-          cache: ${{ inputs.cache }}
-          node-version: ${{ inputs.node-version }}
-      - name: Check duplications
+      - uses: actions/checkout@v2
+      - working-directory: ./actions/npm-dependency-duplications
         run: |
-          cd ${{ inputs.project-path }}
-          npm dedupe
-          git status -s | grep " M package-lock.json" && echo "::"warning file=package-lock.json"::"Duplicate dependencies found. Run npm dedupe to remove them, or add --dry-run parameter to get more info.
-          git reset --hard HEAD
+          npm ci
+          npm run test
+
+  check-dist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies
+        working-directory: ./actions/npm-dependency-duplications
+        run: npm ci
+
+      - name: Rebuild the dist/ directory
+        working-directory: ./actions/npm-dependency-duplications
+        run: npm run prepare
+
+      - name: Compare the expected and actual dist/ directories
+        working-directory: ./actions/npm-dependency-duplications
+        run: |
+          if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
+            echo "Detected uncommitted changes after build.  See status below:"
+            git diff
+            exit 1
+          fi
+        id: diff
+
+      # If index.js was different from expected, upload the expected version as an artifact
+      - uses: actions/upload-artifact@v2
+        if: ${{ failure() && steps.diff.conclusion == 'failure' }}
+        with:
+          name: npm-dependency-duplications/dist
+          path: actions/npm-dependency-duplications/dist/
+
+  # test action works running from the graph
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./actions/npm-dependency-duplications

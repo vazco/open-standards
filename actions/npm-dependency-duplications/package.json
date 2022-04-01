@@ -1,5 +1,5 @@
 {
-  "name": "npm-dependency-vulnerabilities",
+  "name": "npm-dependency-duplications",
   "scripts": {
     "lint": "eslint .",
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
