@@ -49,7 +49,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ failure() && steps.diff.conclusion == 'failure' }}
         with:
-          name: npm-dependency-duplications/dist
+          name: dist
           path: actions/npm-dependency-duplications/dist/
 
   # test action works running from the graph
