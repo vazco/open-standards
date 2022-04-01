@@ -14,8 +14,8 @@ jobs:
       - uses: actions/checkout@v2
       - working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
-        npm ci
-        npm run test
+          npm ci
+          npm run test
 
   check-dist:
     runs-on: ubuntu-latest
