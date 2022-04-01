@@ -1,12 +1,9 @@
 name: 'Npm security audit'
 description: 'Checks if project dependencies have any known vulnerabilities.'
 inputs:
-  project-path:
-    default: .
+  path:
     description: NPM project localization
     required: false
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.project-path }}
+  using: 'node16'
+  main: 'dist/index.js'

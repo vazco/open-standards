@@ -4,11 +4,14 @@ This action check npm dependency vulnerabilities using [npm-audit](https://docs.
 
 ## Inputs
 
-## `project-path`
+## `path`
 
 **Optional** The path to node project. Default value is '.' (root).
 
 ## Example usage
+
+```yaml
 uses: vazco/open-standards/actions/npm-dependency-vulnerabilities/@master
 with:
-project-path: 'applications/client'
+    path: 'applications/client'
+```
