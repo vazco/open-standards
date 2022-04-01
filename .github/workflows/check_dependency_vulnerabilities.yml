@@ -1,6 +1,8 @@
-name: "npm-dependency-vulnerabilities unit-test"
+name: "npm-dependency-vulnerabilities test"
 on:
   pull_request:
+    paths:
+      - 'npm-dependency-vulnerabilities'
   push:
     branches:
       - master
