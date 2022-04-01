@@ -19,8 +19,6 @@ jobs:
 
   check-dist:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./actions/npm-dependency-vulnerabilities
     steps:
       - uses: actions/checkout@v2
 
@@ -30,12 +28,15 @@ jobs:
           node-version: 16.x
 
       - name: Install dependencies
+        working-directory: ./actions/npm-dependency-vulnerabilities
         run: npm ci
 
       - name: Rebuild the dist/ directory
+        working-directory: ./actions/npm-dependency-vulnerabilities
         run: npm run prepare
 
       - name: Compare the expected and actual dist/ directories
+        working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
           if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
             echo "Detected uncommitted changes after build.  See status below:"
@@ -48,8 +49,8 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: ${{ failure() && steps.diff.conclusion == 'failure' }}
         with:
-          name: dist
-          path: dist/
+          name: npm-dependency-vulnerabilities/dist
+          path: actions/npm-dependency-vulnerabilities/dist/
 
   # test action works running from the graph
   test:
