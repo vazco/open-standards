@@ -10,12 +10,12 @@ on:
 jobs:
   units:
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./actions/npm-dependency-vulnerabilities
     steps:
       - uses: actions/checkout@v2
-      - run: npm ci
-      - run: npm test
+      - working-directory: ./actions/npm-dependency-vulnerabilities
+        run: |
+        npm ci
+        npm run test
 
   check-dist:
     runs-on: ubuntu-latest
