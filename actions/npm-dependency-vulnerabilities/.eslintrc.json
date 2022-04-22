@@ -5,11 +5,12 @@
         "jest": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": "vazco",
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
+    "ignorePatterns": ["/dist", "/test"],
     "parserOptions": {
         "ecmaVersion": 2018
     },
