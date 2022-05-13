@@ -1,4 +1,4 @@
-name: 'Npm security audit'
+name: 'npm security audit'
 description: 'Checks if project dependencies have any known vulnerabilities.'
 inputs:
   path:
