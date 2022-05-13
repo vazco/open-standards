@@ -65,3 +65,5 @@ jobs:
         with:
           node-version: 15
       - uses: ./actions/npm-dependency-duplications
+        with:
+          path: ./actions/npm-dependency-duplications/test/positive
