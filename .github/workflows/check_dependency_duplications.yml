@@ -6,6 +6,8 @@ on:
       - master
     paths:
       - 'npm-dependency-duplications'
+  workflow_dispatch:
+
 
 jobs:
   units:
