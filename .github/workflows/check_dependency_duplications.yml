@@ -60,4 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set Node.js 15
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 15
       - uses: ./actions/npm-dependency-duplications

@@ -35,6 +35,13 @@ async function main() {
       [],
       opts,
     );
+
+    const { stdout: nodeVOutput } = await exec.getExecOutput(
+      'node -v',
+      [],
+      opts,
+    );
+    core.info(`Node -v output: ${nodeVOutput}`);
   } catch (error) {
     core.warning(error.message);
   }
