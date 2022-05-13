@@ -3,7 +3,7 @@ description: 'Checks if project dependencies have any known vulnerabilities.'
 inputs:
   path:
     default: .
-    description: NPM project localization
+    description: npm project localization
     required: false
 runs:
   using: 'node16'
