@@ -1,0 +1,7 @@
+{
+  "name": "positive",
+  "version": "1.0.0",
+  "dependencies": {
+    "@parcel/utils": "2.0.0-alpha.1"
+  }
+}

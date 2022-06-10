@@ -1,0 +1,10 @@
+name: npm security audit
+description: Checks if project dependencies have any known vulnerabilities.
+inputs:
+  path:
+    default: .
+    description: npm project localization
+    required: false
+runs:
+  using: node16
+  main: dist/index.js
