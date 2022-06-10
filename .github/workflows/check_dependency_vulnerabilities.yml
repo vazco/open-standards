@@ -1,11 +1,11 @@
-name: "npm-dependency-vulnerabilities test"
+name: npm-dependency-vulnerabilities test
 on:
   pull_request:
   push:
     branches:
       - master
     paths:
-      - 'npm-dependency-vulnerabilities'
+      - npm-dependency-vulnerabilities
   workflow_dispatch:
 
 jobs:

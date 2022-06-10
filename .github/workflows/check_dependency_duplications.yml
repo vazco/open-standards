@@ -1,11 +1,11 @@
-name: "npm-dependency-duplications test"
+name: npm-dependency-duplications test
 on:
   pull_request:
   push:
     branches:
       - master
     paths:
-      - 'npm-dependency-duplications'
+      - npm-dependency-duplications
   workflow_dispatch:
 
 

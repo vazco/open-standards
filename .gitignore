@@ -1,4 +1,6 @@
-
+*.vsix
+.history/
 .idea/
-node_modules
+.vscode/*
 actions/*/dist
+node_modules
