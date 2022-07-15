@@ -10,7 +10,7 @@ The PR could be merged if it has two approvals, no changes requested, and:
 - after 2 workdays, if over 50% of Vazco developers give a thumb up
 - after 5 workdays, if the number of thumbs up is greater than thumbs down, there are no serious arguments against it (discussion is over)
 
-PR can decline if:
+PR can be declined if:
 - after 2 workdays, if over 50% of Vazco developers give a thumb down
 - after 5 workdays, if the number of thumbs down is greater than thumbs up
 
