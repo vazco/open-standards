@@ -14,10 +14,10 @@ Example PR on adding workflows to repository: [vazco/uniforms PR#1076](https://g
 
 ### List of public GitHub actions developed under the vazco organization
 
-#### actions/npm-dependency-duplications
+#### [`npm-dependency-duplications`](actions/npm-dependency-duplications)
 
 Simple npm action for detecting the dependency duplications. The action is based on the `npm dedupe` command.
 
-#### actions/npm-dependency-vulnerabilities
+#### [`npm-dependency-vulnerabilities`](actions/npm-dependency-vulnerabilities)
 
 Action for discovering npm dependency vulnerabilities. It is based on `npm audit`.  
