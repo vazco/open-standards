@@ -4,7 +4,7 @@
 
 If you want to add or change anything in this repository, please open an issue with a detailed proposal description or make a PR and implement it yourself. Consider that any change could affect multiple projects depending on it, so please, be careful.
 
-At the time of writing, GitHub doesn't provide any satisfying solution for versioning multiple GitHub actions in a single repository, so the changes should be backward compatible. If you plan to add an extensive action that will be actively developed, consider creating its own repository and put a description with a link to it in the vazco/open-standards readme.
+At the time of writing, GitHub doesn't provide any satisfying solution for versioning multiple GitHub actions in a single repository, so changes should be backward compatible. If you plan to add an extensive action that will be actively developed, consider creating its own repository and put a description with a link to it in the vazco/open-standards readme.
 
 The PR could be merged if it has two approvals, no changes requested, and:
 - after 2 workdays, if over 50% of Vazco developers give a thumb up
