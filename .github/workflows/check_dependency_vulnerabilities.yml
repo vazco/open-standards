@@ -12,11 +12,13 @@ jobs:
   units:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set Node.js 16
-        uses: actions/setup-node@v2.5.1
+      - uses: actions/checkout@v4
+      - name: Set Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: '${{ github.workspace }}/actions/npm-dependency-vulnerabilities/package-lock.json'
       - name: Run tests
         working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
@@ -26,13 +28,14 @@ jobs:
   check-dist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set Node.js 16
-        uses: actions/setup-node@v2.5.1
+      - name: Set Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
-
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: '${{ github.workspace }}/actions/npm-dependency-vulnerabilities/package-lock.json'
       - name: Install dependencies and build
         working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
@@ -50,7 +53,7 @@ jobs:
         id: diff
 
       # If index.js was different from expected, upload the expected version as an artifact
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: ${{ failure() && steps.diff.conclusion == 'failure' }}
         with:
           name: dist
@@ -60,5 +63,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./actions/npm-dependency-vulnerabilities
