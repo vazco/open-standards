@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path:
-            - './actions/npm-dependency-duplications/package-lock.json'
-            - './actions/npm-dependency-vulnerabilities/package-lock.json'
+          cache-dependency-path: |
+            './actions/npm-dependency-duplications/package-lock.json',
+            './actions/npm-dependency-vulnerabilities/package-lock.json'
       - name: Run tests
         working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
@@ -37,10 +37,9 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path:
-            - './actions/npm-dependency-duplications/package-lock.json'
-            - './actions/npm-dependency-vulnerabilities/package-lock.json'
-
+          cache-dependency-path: |
+            './actions/npm-dependency-duplications/package-lock.json'
+            './actions/npm-dependency-vulnerabilities/package-lock.json'
       - name: Install dependencies and build
         working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
