@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
+          cache-dependency-path: '${{ github.workspace }}/actions/npm-dependency-vulnerabilities/package-lock.json'
       - name: Install dependencies and build
         working-directory: ./actions/npm-dependency-vulnerabilities
         run: |
